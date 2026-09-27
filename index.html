@@ -7,37 +7,71 @@
 
   <style>
     :root {
-      --bg: #07111f;
-      --bg2: #0b1f36;
+      --bg: #030712;
+      --bg2: #08111f;
       --card: rgba(255, 255, 255, 0.08);
       --card2: rgba(255, 255, 255, 0.12);
-      --text: #f5f7fb;
-      --muted: #b8c4d6;
-      --blue: #3aa7ff;
-      --red: #ff315a;
-      --yellow: #ffd166;
-      --green: #4ade80;
-      --border: rgba(255, 255, 255, 0.16);
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      --radius: 22px;
+      --border: rgba(255, 255, 255, 0.18);
+      --text: #f8fafc;
+      --muted: #a8b3c7;
+      --blue: #38bdf8;
+      --cyan: #22d3ee;
+      --purple: #8b5cf6;
+      --pink: #f43f5e;
+      --green: #22c55e;
+      --yellow: #facc15;
+      --radius: 26px;
+      --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(58, 167, 255, 0.25), transparent 35%),
-        radial-gradient(circle at 80% 10%, rgba(255, 49, 90, 0.18), transparent 30%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
-      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.75;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(56, 189, 248, 0.22), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(244, 63, 94, 0.2), transparent 28%),
+        radial-gradient(circle at 50% 90%, rgba(139, 92, 246, 0.18), transparent 35%),
+        linear-gradient(180deg, #020617, #07111f 45%, #020617);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background-image:
+        radial-gradient(#ffffff 0.7px, transparent 0.7px),
+        radial-gradient(#38bdf8 0.7px, transparent 0.7px);
+      background-size: 70px 70px, 130px 130px;
+      background-position: 0 0, 30px 50px;
+      opacity: 0.22;
+      animation: stars 55s linear infinite;
+    }
+
+    @keyframes stars {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-500px);
+      }
     }
 
     a {
@@ -46,124 +80,190 @@
     }
 
     .container {
-      width: min(1180px, 92%);
+      width: min(1200px, 92%);
       margin: auto;
+    }
+
+    .orb {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 999px;
+      filter: blur(70px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .orb.one {
+      background: var(--blue);
+      top: 8%;
+      left: -120px;
+    }
+
+    .orb.two {
+      background: var(--pink);
+      right: -140px;
+      top: 30%;
+    }
+
+    .orb.three {
+      background: var(--purple);
+      left: 35%;
+      bottom: -160px;
     }
 
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      background: rgba(7, 17, 31, 0.8);
+      z-index: 1000;
+      backdrop-filter: blur(22px);
+      background: rgba(2, 6, 23, 0.72);
       border-bottom: 1px solid var(--border);
     }
 
     .nav {
+      height: 78px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 16px 0;
+      justify-content: space-between;
+      gap: 20px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
+      gap: 14px;
+      font-weight: 900;
+      letter-spacing: -0.4px;
     }
 
-    .logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #0e3a66, #08182c);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      position: relative;
-      box-shadow: 0 0 25px rgba(58, 167, 255, 0.4);
+    .brand-logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(244, 63, 94, 0.25)),
+        rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
       display: grid;
       place-items: center;
-      color: var(--red);
-      font-size: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.25);
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-logo span {
+      font-size: 25px;
     }
 
     .nav-links {
       display: flex;
-      gap: 18px;
-      font-size: 14px;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      padding: 9px 13px;
+      border-radius: 999px;
       color: var(--muted);
+      font-size: 14px;
+      transition: 0.2s;
     }
 
     .nav-links a:hover {
-      color: var(--text);
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
     }
 
     .hero {
-      padding: 86px 0 60px;
+      padding: 90px 0 80px;
+      position: relative;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
-      gap: 34px;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 38px;
       align-items: center;
     }
 
-    .badge {
+    .eyebrow {
       display: inline-flex;
-      gap: 8px;
       align-items: center;
-      padding: 8px 14px;
+      gap: 10px;
+      padding: 9px 15px;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      background: rgba(56, 189, 248, 0.1);
+      color: #dff8ff;
       border-radius: 999px;
-      background: rgba(58, 167, 255, 0.12);
-      border: 1px solid rgba(58, 167, 255, 0.35);
-      color: #d8efff;
-      margin-bottom: 18px;
+      font-weight: 700;
       font-size: 14px;
+      margin-bottom: 22px;
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.14);
     }
 
     h1 {
-      font-size: clamp(42px, 7vw, 78px);
-      line-height: 1.05;
-      margin-bottom: 22px;
-      letter-spacing: -2px;
+      font-size: clamp(46px, 8vw, 94px);
+      line-height: 0.95;
+      letter-spacing: -4px;
+      margin-bottom: 28px;
     }
 
-    .gradient-text {
-      background: linear-gradient(90deg, #ffffff, #8fd3ff, #ff7a95);
+    .grad {
+      background: linear-gradient(90deg, #ffffff, #7dd3fc, #a78bfa, #fb7185);
       -webkit-background-clip: text;
       color: transparent;
     }
 
     .lead {
-      color: var(--muted);
       font-size: 19px;
-      max-width: 760px;
-      margin-bottom: 28px;
+      color: var(--muted);
+      max-width: 780px;
+      margin-bottom: 32px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
+      margin-bottom: 30px;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 13px 20px;
-      border-radius: 14px;
+      gap: 9px;
+      padding: 14px 21px;
+      border-radius: 16px;
+      font-weight: 900;
+      transition: 0.22s;
       border: 1px solid var(--border);
-      font-weight: 700;
-      transition: 0.2s;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--blue), #705cff);
-      color: white;
       border: none;
+      background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+      color: white;
+      box-shadow: 0 18px 45px rgba(56, 189, 248, 0.22);
     }
 
     .btn-secondary {
@@ -172,134 +272,227 @@
     }
 
     .btn:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       box-shadow: var(--shadow);
     }
 
-    .hero-card {
-      padding: 26px;
-      border-radius: var(--radius);
-      background: var(--card);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-
-    .big-logo {
-      height: 230px;
-      border-radius: 26px;
-      background:
-        radial-gradient(circle at 40% 30%, rgba(255,255,255,0.16), transparent 20%),
-        linear-gradient(160deg, #103c68, #061224);
+    .stats {
       display: grid;
-      place-items: center;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+      max-width: 680px;
+    }
+
+    .stat {
+      padding: 17px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.07);
       border: 1px solid var(--border);
-      margin-bottom: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+      line-height: 1;
+      color: white;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .mission-card {
       position: relative;
+      padding: 24px;
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.05));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
 
-    .big-logo::before,
-    .big-logo::after {
+    .mission-card::before {
       content: "";
       position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.75);
+      inset: -2px;
+      background:
+        radial-gradient(circle at 40% 20%, rgba(56, 189, 248, 0.26), transparent 28%),
+        radial-gradient(circle at 85% 70%, rgba(244, 63, 94, 0.2), transparent 26%);
+      z-index: -1;
     }
 
-    .big-logo::before {
-      width: 4px;
-      height: 4px;
-      top: 35px;
-      left: 50px;
-      box-shadow:
-        80px 20px white,
-        140px 70px white,
-        35px 120px white,
-        190px 145px white,
-        230px 45px white;
-    }
-
-    .big-logo::after {
-      width: 150px;
-      height: 150px;
-      border: 2px solid rgba(255, 49, 90, 0.7);
-      transform: rotate(-25deg);
-      background: transparent;
-      box-shadow: 0 0 30px rgba(255,49,90,0.25);
-    }
-
-    .rocket {
+    .planet {
+      height: 310px;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.23), transparent 15%),
+        radial-gradient(circle at center, #12366a 0%, #081c39 45%, #020617 72%);
+      border: 1px solid var(--border);
       position: relative;
-      z-index: 2;
-      font-size: 72px;
-      filter: drop-shadow(0 0 20px rgba(255,49,90,0.8));
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      margin-bottom: 22px;
     }
 
-    .info-list {
+    .planet::before {
+      content: "";
+      position: absolute;
+      width: 430px;
+      height: 120px;
+      border: 2px solid rgba(56, 189, 248, 0.55);
+      border-radius: 50%;
+      transform: rotate(-18deg);
+      box-shadow: 0 0 35px rgba(56, 189, 248, 0.25);
+    }
+
+    .planet::after {
+      content: "🚀";
+      position: absolute;
+      font-size: 82px;
+      filter: drop-shadow(0 0 25px rgba(244, 63, 94, 0.9));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(-10deg);
+      }
+      50% {
+        transform: translateY(-16px) rotate(4deg);
+      }
+    }
+
+    .meta-list {
       display: grid;
       gap: 12px;
-      color: var(--muted);
-      font-size: 15px;
     }
 
-    .info-list strong {
+    .meta {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 13px;
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .meta b {
       color: white;
     }
 
     section {
-      padding: 54px 0;
+      padding: 70px 0;
     }
 
-    .section-title {
-      margin-bottom: 26px;
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 22px;
+      margin-bottom: 28px;
     }
 
-    .section-title span {
+    .section-kicker {
       color: var(--blue);
-      font-weight: 800;
-      font-size: 14px;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      font-size: 13px;
+      margin-bottom: 7px;
     }
 
-    .section-title h2 {
-      font-size: clamp(30px, 4vw, 46px);
-      margin-top: 6px;
-      letter-spacing: -1px;
+    h2 {
+      font-size: clamp(32px, 5vw, 58px);
+      line-height: 1;
+      letter-spacing: -2px;
     }
 
-    .cards {
+    .section-desc {
+      max-width: 520px;
+      color: var(--muted);
+    }
+
+    .glass {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.045));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.24);
+    }
+
+    .intro-card {
+      padding: 32px;
+    }
+
+    .intro-card p {
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .intro-card strong {
+      color: white;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.18);
+    .feature {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .card h3 {
+    .feature::before {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.15);
+      right: -45px;
+      top: -45px;
+      filter: blur(6px);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(139, 92, 246, 0.25));
+      border: 1px solid var(--border);
+      font-size: 24px;
+    }
+
+    .feature h3,
+    .program h3,
+    .simple-card h3 {
+      font-size: 22px;
       margin-bottom: 10px;
-      font-size: 21px;
+      letter-spacing: -0.5px;
     }
 
-    .card p {
+    .feature p,
+    .program p,
+    .simple-card p {
       color: var(--muted);
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.1);
-      color: #dcecff;
-      font-size: 12px;
-      margin-bottom: 12px;
-      border: 1px solid var(--border);
     }
 
     .program-grid {
@@ -309,37 +502,62 @@
     }
 
     .program {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+      transition: 0.22s;
     }
 
-    .program h3 {
-      font-size: 22px;
-      margin-bottom: 8px;
-      color: white;
+    .program:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 25px 80px rgba(56, 189, 248, 0.1);
+    }
+
+    .program-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+      color: #e0f7ff;
+      background: rgba(56, 189, 248, 0.13);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      white-space: nowrap;
     }
 
     .date {
-      color: var(--yellow);
-      font-weight: 700;
-      margin-bottom: 10px;
       display: block;
+      color: var(--yellow);
+      font-weight: 900;
+      margin-bottom: 12px;
     }
 
-    .program p {
-      color: var(--muted);
+    .program.featured {
+      border-color: rgba(244, 63, 94, 0.38);
+      background:
+        radial-gradient(circle at top right, rgba(244, 63, 94, 0.16), transparent 35%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.045));
     }
 
-    .highlight {
-      border-left: 4px solid var(--red);
-    }
-
-    .two-col {
+    .simple-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 18px;
+    }
+
+    .simple-card {
+      padding: 28px;
     }
 
     ul {
@@ -348,120 +566,264 @@
     }
 
     li {
-      margin-bottom: 8px;
+      margin-bottom: 9px;
+    }
+
+    .note {
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(250, 204, 21, 0.1);
+      border: 1px solid rgba(250, 204, 21, 0.25);
+      color: #fff7d0;
+      margin-top: 18px;
     }
 
     .table-wrap {
       overflow-x: auto;
-      border-radius: var(--radius);
+      border-radius: 26px;
       border: 1px solid var(--border);
-      background: var(--card);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: var(--shadow);
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 900px;
+      min-width: 980px;
     }
 
     th, td {
-      padding: 16px;
-      text-align: left;
+      padding: 17px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.13);
       vertical-align: top;
-      border-bottom: 1px solid var(--border);
+      text-align: left;
     }
 
     th {
-      background: rgba(58, 167, 255, 0.16);
+      background: rgba(56, 189, 248, 0.16);
       color: white;
-      font-size: 14px;
+      font-size: 13px;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
+      letter-spacing: 1px;
     }
 
     td {
       color: var(--muted);
+      font-size: 14px;
     }
 
     td:first-child {
       color: white;
-      font-weight: 800;
+      font-weight: 900;
+    }
+
+    td strong {
+      color: white;
+    }
+
+    .email {
+      color: #86efac;
+      font-weight: 900;
     }
 
     .timeline {
       display: grid;
-      gap: 16px;
+      gap: 15px;
+      position: relative;
     }
 
     .timeline-item {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 16px;
-      background: var(--card);
+      grid-template-columns: 250px 1fr;
+      gap: 18px;
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.07);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px;
+      transition: 0.22s;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(5px);
+      border-color: rgba(34, 197, 94, 0.45);
     }
 
     .timeline-date {
-      color: var(--green);
-      font-weight: 800;
+      color: #86efac;
+      font-weight: 900;
     }
 
-    .contact-box {
+    .timeline-text {
+      color: var(--muted);
+    }
+
+    .contact {
+      padding: 36px;
       background:
-        linear-gradient(135deg, rgba(58, 167, 255, 0.18), rgba(255, 49, 90, 0.12)),
-        var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px;
-      box-shadow: var(--shadow);
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(244, 63, 94, 0.14), transparent 32%),
+        rgba(255, 255, 255, 0.07);
+    }
+
+    .contact p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .contact strong {
+      color: white;
     }
 
     footer {
-      padding: 28px 0;
-      color: var(--muted);
       border-top: 1px solid var(--border);
+      padding: 28px 0;
       text-align: center;
+      color: var(--muted);
+      background: rgba(2, 6, 23, 0.4);
     }
 
-    @media (max-width: 900px) {
+    .print-btn {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 999;
+      width: 58px;
+      height: 58px;
+      border-radius: 20px;
+      border: none;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 18px 50px rgba(56, 189, 248, 0.32);
+    }
+
+    @media (max-width: 980px) {
       .hero-grid,
-      .cards,
+      .split,
       .program-grid,
-      .two-col {
+      .simple-grid,
+      .feature-grid {
         grid-template-columns: 1fr;
       }
 
-      .nav {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
         align-items: flex-start;
-        gap: 14px;
+        flex-direction: column;
+      }
+
+      .menu-btn {
+        display: block;
       }
 
       .nav-links {
+        position: absolute;
+        left: 4%;
+        right: 4%;
+        top: 86px;
         display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+        border-radius: 22px;
+        background: rgba(2, 6, 23, 0.94);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(20px);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 13px;
       }
 
       .timeline-item {
         grid-template-columns: 1fr;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      body::before,
+      body::after,
+      .orb,
+      header,
+      .print-btn {
+        display: none;
+      }
+
+      .glass,
+      .program,
+      .feature,
+      .simple-card,
+      .contact,
+      .timeline-item {
+        background: white;
+        color: black;
+        border: 1px solid #999;
+        box-shadow: none;
+      }
+
+      .lead,
+      .program p,
+      .feature p,
+      .simple-card p,
+      .contact p,
+      td,
+      ul,
+      .timeline-text {
+        color: #222;
+      }
+
+      .grad {
+        color: black;
+        background: none;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
   <header>
     <div class="container nav">
       <a href="#" class="brand">
-        <div class="logo">🚀</div>
-        <span>Számalk Space Club</span>
+        <div class="brand-logo">
+          <img src="logo.png" alt="Számalk Space Club logó" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+          <span style="display:none;">🚀</span>
+        </div>
+        <div>
+          <div>Számalk Space Club</div>
+          <small style="color: var(--muted); font-weight: 700;">Programterv 2026/27</small>
+        </div>
       </a>
 
-      <nav class="nav-links">
-        <a href="#club">A klub</a>
+      <button class="menu-btn" id="menuBtn">☰</button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#rolunk">A klub</a>
         <a href="#programok">Programok</a>
-        <a href="#iskola">Mit ad az iskolának</a>
+        <a href="#iskola">Iskolának</a>
+        <a href="#szabalyok">Szabályok</a>
         <a href="#keresek">Kérések</a>
+        <a href="#timeline">Következő hetek</a>
         <a href="#kapcsolat">Kapcsolat</a>
       </nav>
     </div>
@@ -471,71 +833,110 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="badge">2026/27-es tanév · ESA és MANT programok</div>
+          <div class="eyebrow">🛰️ ESA · MANT · DlabSPACE · 2026/27</div>
+
           <h1>
-            <span class="gradient-text">Számalk Space Club</span><br />
+            <span class="grad">Számalk Space Club</span><br>
             programterv
           </h1>
+
           <p class="lead">
             Űrkutatás, műholdas adatok, Linux, hálózatok, kommunikáció és versenyprojektek
-            egy középiskolai klubban — gyakorlati, ingyenesen nevezhető programokkal.
+            egy középiskolai klubban. A cél: kézzelfogható eredmények, ESA-oklevelek,
+            beadott projektek és egy olyan csapat, ami tényleg működik.
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#programok">Programok megnézése</a>
+            <a class="btn btn-primary" href="#programok">Programok megnézése 🚀</a>
             <a class="btn btn-secondary" href="#keresek">Iskolai kérések</a>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>4–6</strong>
+              <span>fő létszámcél év végére</span>
+            </div>
+            <div class="stat">
+              <strong>0 Ft</strong>
+              <span>díjmentes nevezések</span>
+            </div>
+            <div class="stat">
+              <strong>1–2</strong>
+              <span>személyes alkalom havonta</span>
+            </div>
           </div>
         </div>
 
-        <aside class="hero-card">
-          <div class="big-logo">
-            <div class="rocket">🚀</div>
-          </div>
+        <aside class="mission-card">
+          <div class="planet"></div>
 
-          <div class="info-list">
-            <p><strong>Címzett:</strong> Halász István, igazgató</p>
-            <p><strong>Intézmény:</strong> SZÁMALK-Szalézi Technikum és Szakgimnázium</p>
-            <p><strong>Szakmai partner:</strong> DlabSPACE Kft. — Győző Gábor</p>
-            <p><strong>Első ülés:</strong> 2026.10.01.</p>
-            <p><strong>Létszámcél:</strong> 4–6 fő év végére</p>
+          <div class="meta-list">
+            <div class="meta">👤 <span><b>Címzett:</b> Halász István, igazgató</span></div>
+            <div class="meta">🏫 <span><b>Intézmény:</b> SZÁMALK-Szalézi Technikum és Szakgimnázium</span></div>
+            <div class="meta">🤝 <span><b>Szakmai partner:</b> DlabSPACE Kft. / ESA-partner</span></div>
+            <div class="meta">📅 <span><b>Dátum:</b> 2026.09.20.</span></div>
+            <div class="meta">🚀 <span><b>Első ülés:</b> 2026. október első hete</span></div>
           </div>
         </aside>
       </div>
     </section>
 
-    <section id="club">
+    <section id="rolunk">
       <div class="container">
-        <div class="section-title">
-          <span>01</span>
-          <h2>Mit csinál a klub?</h2>
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">01 / A klub</div>
+            <h2>Mit csinál a klub?</h2>
+          </div>
+          <p class="section-desc">
+            Nem sima szakkör, hanem projektalapú űr- és technológiai klub.
+          </p>
         </div>
 
-        <div class="cards">
-          <article class="card">
-            <div class="pill">Földi szegmens</div>
-            <h3>Nem csak rakéta, hanem rendszer</h3>
-            <p>
-              A klub szakmai alapja a műholdas munkák földi oldala: hálózat, Linux,
-              protokollok, adatfolyamok, telemetria és üzemeltetés.
-            </p>
+        <div class="intro-card glass">
+          <p>
+            Köszönjük az igazgató úr támogatását. Ez a dokumentum azt rögzíti, hogy pontosan mit csinál
+            a klub a tanévben, és mit kérünk az iskolától ahhoz, hogy ez működjön.
+          </p>
+
+          <p>
+            Az Európai Űrügynökség, vagyis az <strong>ESA</strong>, és a Magyar Asztronautikai Társaság,
+            vagyis a <strong>MANT</strong> középiskolai programjaiban indulunk. Ezek nevezése díjmentes,
+            a munkához használt szoftverek böngészőben futnak vagy oktatási célra ingyenesek,
+            a műholdas adatok pedig nyílt hozzáférésűek.
+          </p>
+
+          <p>
+            Szakmailag a <strong>földi szegmensre</strong> építünk. A műholdas munkának két fele van:
+            a repülő eszköz és a földi oldal. A legtöbb iskolai csapat az eszközt építi, de a földi láncon
+            bukik el: nem jön le a telemetria, nincs adatrögzítés, nincs tartalék terv. A földi oldalhoz
+            hálózat, Linux, protokoll, adatfolyam és üzemeltetés kell — vagyis pont az, amit a
+            rendszerinformatikai képzés tanít.
+          </p>
+
+          <p>
+            <strong>Ülésrend:</strong> havi 1–2 személyes alkalom, körülbelül 2–3 hetente, valamint heti online
+            egyeztetés Discordon. A személyes alkalmat az iskolában tartjuk, ha kapunk hozzá termet és felügyeletet.
+          </p>
+        </div>
+
+        <div class="feature-grid" style="margin-top: 18px;">
+          <article class="feature glass">
+            <div class="icon">🧑‍💻</div>
+            <h3>Küldetés-sáv</h3>
+            <p>Kódolás, adatgyűjtés, szenzoradatok feldolgozása, műholdas adatok elemzése és működő projektek készítése.</p>
           </article>
 
-          <article class="card">
-            <div class="pill">Küldetés-sáv</div>
-            <h3>Kódolás és adatfeldolgozás</h3>
-            <p>
-              A küldetés-sáv programoz, adatot gyűjt, műholdas vagy szenzoros adatokat
-              dolgoz fel, és működő projekteket készít.
-            </p>
+          <article class="feature glass">
+            <div class="icon">🎬</div>
+            <h3>Kommunikációs sáv</h3>
+            <p>Dokumentáció, grafika, videó, prezentáció és ismeretterjesztés. Ez versenyeken pontot is ér.</p>
           </article>
 
-          <article class="card">
-            <div class="pill">Kommunikációs sáv</div>
-            <h3>Dokumentáció és média</h3>
-            <p>
-              A kommunikációs sáv grafikát, videót, prezentációt és projektbemutatót készít.
-              Ez versenypontokat is ér, nem csak díszítés.
-            </p>
+          <article class="feature glass">
+            <div class="icon">🛰️</div>
+            <h3>Földi szegmens</h3>
+            <p>Linux, hálózat, protokollok, telemetria, adatfolyamok és üzemeltetés — ez lesz a klub szakmai arcéle.</p>
           </article>
         </div>
       </div>
@@ -543,157 +944,231 @@
 
     <section id="programok">
       <div class="container">
-        <div class="section-title">
-          <span>02</span>
-          <h2>A tanév programjai</h2>
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">02 / Programok</div>
+            <h2>A tanév programjai</h2>
+          </div>
+          <p class="section-desc">
+            Ingyenes nevezések, valódi projektek, nemzetközi háttér és kézzelfogható eredmények.
+          </p>
         </div>
 
         <div class="program-grid">
-          <article class="program">
-            <h3>Astro Pi Mission Zero</h3>
+          <article class="program glass">
+            <div class="program-top">
+              <h3>Astro Pi Mission Zero</h3>
+              <span class="tag">Kezdőbarát</span>
+            </div>
             <span class="date">2026. szeptember 14. – 2027. március 22.</span>
             <p>
-              Rövid Python-program, amely a Nemzetközi Űrállomáson fut legfeljebb
-              30 másodpercig. Böngészőből megoldható, hardver nélkül. Minden résztvevő
-              ESA-oklevelet kap.
+              Rövid Python-program, amely a Nemzetközi Űrállomás fedélzetén fut legfeljebb 30 másodpercig.
+              Nem kell hozzá hardver, böngészőből megoldható. Minden résztvevő ESA-oklevelet kap.
             </p>
           </article>
 
-          <article class="program">
-            <h3>Astro Pi Mission Space Lab</h3>
+          <article class="program glass">
+            <div class="program-top">
+              <h3>Astro Pi Mission Space Lab</h3>
+              <span class="tag">Haladó</span>
+            </div>
             <span class="date">2026. szeptember 14. – 2027. február 22.</span>
             <p>
-              Haladó csapatverseny 2–6 fős csapatoknak. A csapat saját űrtudományi
-              projektet választ, az ISS szenzoraiból vagy kamerájából gyűjt adatot.
+              2–6 fős csapatverseny. A csapat saját űrtudományi projektet választ, adatot gyűjt az ISS
+              fedélzeti szenzoraiból vagy kamerájából, majd elemzi az eredményeket.
             </p>
           </article>
 
-          <article class="program highlight">
-            <h3>CanSat Hungary 2027</h3>
+          <article class="program glass featured">
+            <div class="program-top">
+              <h3>CanSat Hungary 2027</h3>
+              <span class="tag">Fő projekt</span>
+            </div>
             <span class="date">Nevezés: 2026. október 14. · Döntő: 2027. április 9–10.</span>
             <p>
-              Üdítősdoboz méretű műhold építése. A projektben fontos a telemetria,
-              az adatfeldolgozás, a mérések és az angol nyelvű prezentáció is.
+              Üdítősdoboz méretű műhold építése, amelyet rakéta visz körülbelül egy kilométer magasba.
+              Fontos része a telemetria, a mérés, az adatfeldolgozás és az angol nyelvű prezentáció.
+              Nyitott kérdés: mentor tanár és eszközhozzáférés.
             </p>
           </article>
 
-          <article class="program">
-            <h3>Klímadetektívek</h3>
+          <article class="program glass">
+            <div class="program-top">
+              <h3>Klímadetektívek</h3>
+              <span class="tag">Műholdas adatok</span>
+            </div>
             <span class="date">2026. szeptember 7. – 2027. április 2.</span>
             <p>
-              Helyi környezeti probléma vizsgálata nyílt műholdas Föld-megfigyelési
-              adatokkal. Tervezett téma: budapesti hőszigethatás vagy levegőminőség.
+              Egy helyi környezeti probléma vizsgálata nyílt műholdas Föld-megfigyelési adatokkal.
+              Tervezett téma: budapesti hőszigethatás vagy levegőminőség.
             </p>
           </article>
 
-          <article class="program">
-            <h3>Holdtábor — Moon Camp Challenge</h3>
+          <article class="program glass">
+            <div class="program-top">
+              <h3>Holdtábor / Moon Camp Challenge</h3>
+              <span class="tag">Kreatív</span>
+            </div>
             <span class="date">2026. szeptember 18. – 2027. július 27.</span>
             <p>
-              Holdbázis tervezése szabad formátumban: 3D-modell, animáció, játék,
-              makett vagy tudományos kísérlet. Ideális kreatív diákoknak.
+              Holdbázis tervezése szabad formátumban: 3D-modell, animáció, játék, makett vagy tudományos kísérlet.
+              Ez a kommunikációs sáv egyik legjobb terepe.
             </p>
           </article>
 
-          <article class="program">
-            <h3>NASA Space Apps Challenge</h3>
+          <article class="program glass">
+            <div class="program-top">
+              <h3>NASA Space Apps Challenge</h3>
+              <span class="tag">Hackathon</span>
+            </div>
             <span class="date">2026. november 14–15.</span>
             <p>
-              A világ legnagyobb űrhackathonja nyílt NASA-adatokkal. Budapesti vagy
-              virtuális részvétellel oldható meg.
+              A világ legnagyobb űrhackathonja nyílt NASA-adatokkal. Budapesti helyszínen vagy virtuálisan is
+              megoldható, 18 év alatt szülői regisztrációval és kísérettel.
             </p>
           </article>
 
-          <article class="program">
-            <h3>ARISS</h3>
+          <article class="program glass">
+            <div class="program-top">
+              <h3>ARISS</h3>
+              <span class="tag">ISS kapcsolat</span>
+            </div>
             <span class="date">Pályázat az őszi ablakban</span>
             <p>
-              Élő rádiókapcsolat az ISS-sel, telebridge formában. Az iskola nem vesz
-              rádiós eszközt, a kapcsolatot távoli engedélyes állomás biztosítja.
+              Élő rádiókapcsolat az ISS-sel. Telebridge formában pályázunk, így az iskolának nem kell rádiós eszközt
+              beszereznie. A pályázat önmagában is komplett diákprojekt.
             </p>
           </article>
 
-          <article class="program">
-            <h3>MANT-pályázatok és „Irány az űr!”</h3>
+          <article class="program glass">
+            <div class="program-top">
+              <h3>„Irány az űr!” és MANT-pályázatok</h3>
+              <span class="tag">Gyors siker</span>
+            </div>
             <span class="date">Ősztől tavaszig</span>
             <p>
-              Online fordulók, budapesti döntő, diák- és rajzpályázatok. Ezek gyorsabb
-              sikerélményt adhatnak a nagyobb projektek előtt.
+              Kárpát-medencei csapatverseny online fordulókkal és budapesti döntővel, valamint MANT diák- és
+              rajzpályázatok. Ezek adják az első közös sikerélményeket.
             </p>
           </article>
+        </div>
+
+        <div class="note">
+          <strong>Iskolának szóló pályázatok:</strong> 2027 februárjában a Nemzeti Tehetség Program és az Erasmus+
+          KA121 keretigénylés is releváns lehet, ha a klub addig látható eredményeket mutat fel.
         </div>
       </div>
     </section>
 
     <section id="iskola">
       <div class="container">
-        <div class="section-title">
-          <span>03</span>
-          <h2>Mit ad a klub az iskolának?</h2>
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">03 / Eredmény</div>
+            <h2>Mit ad a klub az iskolának?</h2>
+          </div>
         </div>
 
-        <div class="two-col">
-          <article class="card">
-            <h3>Kézzelfogható eredmények</h3>
+        <div class="simple-grid">
+          <article class="simple-card glass">
+            <h3>Dokumentált, hivatkozható eredmények</h3>
             <ul>
               <li>ESA-oklevelek a diákok nevére</li>
-              <li>Beadott versenyprojektek</li>
-              <li>Dokumentált eredmények</li>
+              <li>Beadott projektek és versenyeredmények</li>
+              <li>Összeállított médiaanyag</li>
+              <li>Beiskolázási kommunikációban használható tartalom</li>
               <li>Év végi bemutató szülőknek és fenntartónak</li>
-              <li>Felhasználható médiaanyag a beiskolázáshoz</li>
             </ul>
           </article>
 
-          <article class="card">
-            <h3>Forrásteremtési lehetőség</h3>
+          <article class="simple-card glass">
+            <h3>Középtávon forrást hozhat</h3>
             <p>
-              Ha a klub a tanév első felében eredményt mutat fel, alapot adhat a februári
-              Nemzeti Tehetség Program és Erasmus+ KA121 pályázatokhoz.
+              Ha a klub a tanév első felében eredményt mutat fel, akkor a februári NTP- és Erasmus+
+              pályázatokhoz a féléves működés és az addigi eredmények adják az alapot.
             </p>
           </article>
         </div>
       </div>
     </section>
 
-    <section>
+    <section id="vallalas">
       <div class="container">
-        <div class="section-title">
-          <span>04</span>
-          <h2>Amit a klub vállal</h2>
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">04 / Vállalás</div>
+            <h2>Amit mi vállalunk</h2>
+          </div>
         </div>
 
-        <div class="cards">
-          <article class="card">
-            <h3>Díjmentes nevezések</h3>
+        <div class="simple-grid">
+          <article class="simple-card glass">
+            <h3>Díjmentes működés</h3>
             <p>
-              A programok nevezése ingyenes, és a működés nem igényel iskolai költségvetést.
+              Minden nevezés díjmentes, és a klub működése nem igényel iskolai költségvetést.
+              A DlabSPACE Kft. pénzbeli és eszköztámogatást nem nyújt.
             </p>
           </article>
 
-          <article class="card">
+          <article class="simple-card glass">
             <h3>Szakmai mentorálás</h3>
             <p>
-              A DlabSPACE Kft. vállalja a nagykorú mentor szerepét, szakmai előadásokat
-              és havi 1–2 óra mérnöki mentorálást.
+              A DlabSPACE Kft. vállalja a versenynevezésekhez szükséges nagykorú mentor szerepét,
+              helyszínt a személyes alkalmakhoz, mérnök mentort havi 1–2 órában és szakmai előadásokat.
             </p>
           </article>
 
-          <article class="card">
+          <article class="simple-card glass">
             <h3>Kapcsolatépítés</h3>
             <p>
-              Kapcsolatfelvétel az ESERO Hungary, a MANT, a BME kisműholdas csoportja
-              és a Student Spacelab Network felé.
+              Kapcsolatfelvétel az ESERO Hungary, a MANT, a BME kisműholdas csoportja és a
+              Student Spacelab Network hálózat felé.
             </p>
           </article>
+
+          <article class="simple-card glass">
+            <h3>Összeférhetetlenségi nyilatkozat</h3>
+            <p>
+              A DlabSPACE ügyvezetőjének gyermeke a klub tagja. Mivel a felajánlás semmilyen pénzmozgással
+              nem jár, ez érdemi kockázatot nem hordoz, de a teljesség kedvéért rögzítjük.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="szabalyok">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">05 / Keretek</div>
+            <h2>Szabályok, amelyeket betartunk</h2>
+          </div>
+        </div>
+
+        <div class="intro-card glass">
+          <ul>
+            <li>Iskolai teremben kiskorú tanulók felügyelet nélkül nem tartózkodhatnak.</li>
+            <li>A személyes alkalmakat csak patronáló tanár jelenlétében tartjuk az iskolában, egyébként iskolán kívül.</li>
+            <li>Kiskorú tanulók fotó- és videófelvételei kizárólag szülői hozzájárulással kerülnek nyilvánosságra.</li>
+            <li>A CanSat rádiós adása és minden rádiós kísérlet a versenyszervezők és a hatóság előírásai szerint történik.</li>
+            <li>Saját rádióadást nem végzünk, az ARISS-nél is telebridge megoldást kérünk.</li>
+            <li>A klub kommunikációja civil, oktatási keretben marad, védelmi vagy technológiatranszfer-vonatkozás nélkül.</li>
+          </ul>
         </div>
       </div>
     </section>
 
     <section id="keresek">
       <div class="container">
-        <div class="section-title">
-          <span>05</span>
-          <h2>Kérések az iskola felé</h2>
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">06 / Kérések</div>
+            <h2>Kéréseink az iskola felé</h2>
+          </div>
+          <p class="section-desc">
+            Felelőssel és határidővel, hogy egyben lehessen dönteni róluk.
+          </p>
         </div>
 
         <div class="table-wrap">
@@ -710,80 +1185,80 @@
             <tbody>
               <tr>
                 <td>1</td>
-                <td>Patronáló tanár kijelölése.</td>
-                <td>Igazgató</td>
-                <td>Nevezések és iskolai jelenlét alapja</td>
-                <td>Azonnal</td>
+                <td><strong>Patronáló tanár kijelölése.</strong> Nem foglalkozásvezetés: formális felelősség, nevezések aláírása és jelenlét a havi személyes alkalmon, ha az iskolában tartjuk.</td>
+                <td>igazgató</td>
+                <td>minden nevezés és a termi jelenlét alapja</td>
+                <td>azonnal</td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>CanSat mentor tanár kijelölése.</td>
-                <td>Igazgató, szaktanár</td>
+                <td><strong>CanSat mentor tanár.</strong> A versenyszabályzat mentor tanárt ír elő. Ez az egyetlen program, ahol tanári közreműködés kötelező lehet.</td>
+                <td>igazgató, szaktanár</td>
                 <td>CanSat-nevezés</td>
-                <td>Október 7.</td>
+                <td><strong>október 7.</strong></td>
               </tr>
               <tr>
                 <td>3</td>
-                <td>Iskola nevének és logójának használati engedélye.</td>
-                <td>Igazgató</td>
-                <td>Nevezések, pólók, matricák, prezentációk, sajtó</td>
-                <td>Szeptember vége</td>
+                <td><strong>Az iskola nevének és logójának használati engedélye írásban</strong>, a klub nevére és jelére is kiterjedően.</td>
+                <td>igazgató</td>
+                <td>nevezések, pólók, matricák, prezentációk, sajtó</td>
+                <td>szeptember vége</td>
               </tr>
               <tr>
                 <td>4</td>
-                <td>ARISS-hez aláírt adatkezelési nyilatkozat és éves naptár Excelben.</td>
-                <td>Titkárság</td>
+                <td><strong>ARISS-hez aláírt adatkezelési hozzájáruló nyilatkozat és az iskola éves naptára Excel-formátumban.</strong> Képként vagy szkennelve nem fogadják el.</td>
+                <td>titkárság</td>
                 <td>ARISS-pályázat</td>
-                <td>Október 15.</td>
+                <td><strong>október 15.</strong></td>
               </tr>
               <tr>
                 <td>5</td>
-                <td>Hozzáférés elektronikai és 3D-nyomtató eszközökhöz felügyelet mellett.</td>
-                <td>Műszaki szaktanár</td>
+                <td><strong>Hozzáférés az elektronikai és 3D-nyomtató eszközökhöz</strong> tanítási időn kívül, felügyelet mellett.</td>
+                <td>műszaki szaktanár</td>
                 <td>CanSat-építés</td>
-                <td>Október 7.</td>
+                <td><strong>október 7.</strong></td>
               </tr>
               <tr>
                 <td>6</td>
-                <td>Terem havi 1–2 alkalomra és zárható szekrény.</td>
-                <td>Igazgató</td>
-                <td>Klubműködés</td>
-                <td>Október eleje</td>
+                <td><strong>Terem havi 1–2 alkalomra</strong> 90 percre és egy zárható szekrény. Javasolt időpont: egyeztetés szerint.</td>
+                <td>igazgató</td>
+                <td>működés</td>
+                <td>október eleje</td>
               </tr>
               <tr>
                 <td>7</td>
-                <td>Iskolai e-mail cím, például spaceclub@szamalk-szalezi.hu.</td>
-                <td>Rendszergazda</td>
-                <td>Nevezések, levelezés</td>
-                <td>Szeptember vége</td>
+                <td><strong>Iskolai e-mail cím a klubnak</strong>, például <span class="email">spaceclub@szamalk-szalezi.hu</span>.</td>
+                <td>rendszergazda</td>
+                <td>nevezések, levelezés</td>
+                <td>szeptember vége</td>
               </tr>
               <tr>
                 <td>8</td>
-                <td>Szülői hozzájáruló nyilatkozat mintája fotó- és videófelvételekhez.</td>
-                <td>Titkárság</td>
-                <td>Nyilvános megjelenések</td>
-                <td>Első esemény előtt</td>
+                <td><strong>Szülői hozzájáruló nyilatkozat mintája</strong> fotó- és videófelvételek felhasználásához.</td>
+                <td>titkárság</td>
+                <td>minden nyilvános megjelenés</td>
+                <td>az első esemény előtt</td>
               </tr>
               <tr>
                 <td>9</td>
-                <td>Megjelenés az iskola honlapján és közösségi oldalain.</td>
-                <td>Kommunikációs felelős</td>
-                <td>Versenypontszám és beiskolázás</td>
-                <td>Folyamatosan</td>
+                <td><strong>Megjelenés az iskola honlapján és közösségi oldalain</strong> a klub eredményeiről.</td>
+                <td>kommunikációs felelős</td>
+                <td>versenypontszám és beiskolázás</td>
+                <td>folyamatosan</td>
               </tr>
               <tr>
                 <td>10</td>
-                <td>Felelős kijelölése NTP-pályázatra és Erasmus+ egyeztetés.</td>
-                <td>Igazgató</td>
-                <td>Második év forrásai</td>
-                <td>2027. január</td>
+                <td><strong>Felelős kijelölése a februári NTP-pályázatra</strong>, és egyeztetés az Erasmus+ koordinátorral a KA121 keretigénylésről.</td>
+                <td>igazgató</td>
+                <td>a második év forrásai</td>
+                <td><strong>2027. január</strong></td>
               </tr>
               <tr>
                 <td>11</td>
-                <td>Időpont az év végi bemutatóra az iskolai naptárban.</td>
-                <td>Igazgatóhelyettes</td>
-                <td>Zárás, szülői és fenntartói bemutató</td>
-                <td>Tanév rendjének tervezésekor</td>
+                <td><strong>Időpont az év végi bemutatóra</strong> az iskolai naptárban.</td>
+                <td>igazgatóhelyettes</td>
+                <td>zárás, szülői és fenntartói bemutató</td>
+                <td>a tanév rendjének tervezésekor</td>
               </tr>
             </tbody>
           </table>
@@ -791,42 +1266,44 @@
       </div>
     </section>
 
-    <section>
+    <section id="timeline">
       <div class="container">
-        <div class="section-title">
-          <span>06</span>
-          <h2>A következő négy hét</h2>
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">07 / Menetrend</div>
+            <h2>A következő négy hét</h2>
+          </div>
         </div>
 
         <div class="timeline">
           <div class="timeline-item">
-            <div class="timeline-date">Szept. 23. és okt. 1.</div>
-            <div>CanSat online tájékoztatók, mentor- és eszközkérdések tisztázása.</div>
+            <div class="timeline-date">Szeptember 23. 14:00 és október 1. 15:00</div>
+            <div class="timeline-text">CanSat online tájékoztatók. Itt tisztázzuk a mentor- és eszközkérdést.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">Szeptember vége</div>
-            <div>Alakuló ülés, szerepek kiosztása, Astro Pi Mission Zero végigvitele.</div>
+            <div class="timeline-text">Alakuló ülés, szerepek kiosztása, Astro Pi Mission Zero végigvitele egy délután alatt.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">Október 7.</div>
-            <div>Döntés a CanSat-nevezésről a mentor és eszközök alapján.</div>
+            <div class="timeline-text">Döntés a CanSat-nevezésről a mentor és eszközhozzáférés alapján.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">Október 14. 23:59</div>
-            <div>CanSat-nevezés határideje.</div>
+            <div class="timeline-text">CanSat-nevezés határideje.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">Október közepe</div>
-            <div>ARISS-pályázat beadása.</div>
+            <div class="timeline-text">ARISS-pályázat beadása.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-date">November 14–15.</div>
-            <div>NASA Space Apps Challenge.</div>
+            <div class="timeline-text">NASA Space Apps Challenge.</div>
           </div>
         </div>
       </div>
@@ -834,30 +1311,51 @@
 
     <section id="kapcsolat">
       <div class="container">
-        <div class="contact-box">
-          <div class="section-title">
-            <span>07</span>
-            <h2>Kapcsolattartás</h2>
-          </div>
+        <div class="contact glass">
+          <div class="section-kicker">08 / Kapcsolat</div>
+          <h2>Kapcsolattartás</h2>
+
+          <br>
 
           <p>
-            Egy iskolai kapcsolattartó kijelölését kérjük, akihez a klubbal kapcsolatos
-            kérések és adminisztráció befutnak. Ez lehet a patronáló tanár is.
+            Egy kapcsolattartót kérünk az iskola részéről, akihez ezek a kérések és a későbbi
+            adminisztráció befutnak. Ez lehet a patronáló tanár is.
           </p>
-          <br />
+
           <p>
-            <strong>Diákkapcsolattartó:</strong> Győző Dávid<br />
+            <strong>Diákkapcsolattartó:</strong> Győző Dávid<br>
             <strong>Szakmai partner:</strong> DlabSPACE Kft., ügyvezető: Győző Gábor
+          </p>
+
+          <p>
+            Kérjük, jelezze, ha bármelyik pontban más megoldást lát célszerűbbnek — a programot ahhoz igazítjuk.
           </p>
         </div>
       </div>
     </section>
   </main>
 
+  <button class="print-btn" onclick="window.print()" title="Nyomtatás / PDF">🖨️</button>
+
   <footer>
     <div class="container">
-      Számalk Space Club — Programterv · 2026/27
+      Számalk Space Club — Programterv · 2026/27 · ESA / MANT / DlabSPACE
     </div>
   </footer>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+      });
+    });
+  </script>
 </body>
 </html>
