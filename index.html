@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Számalk Space Club — Programterv</title>
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg2: #0b1f36;
+      --card: rgba(255, 255, 255, 0.08);
+      --card2: rgba(255, 255, 255, 0.12);
+      --text: #f5f7fb;
+      --muted: #b8c4d6;
+      --blue: #3aa7ff;
+      --red: #ff315a;
+      --yellow: #ffd166;
+      --green: #4ade80;
+      --border: rgba(255, 255, 255, 0.16);
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(58, 167, 255, 0.25), transparent 35%),
+        radial-gradient(circle at 80% 10%, rgba(255, 49, 90, 0.18), transparent 30%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 17, 31, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #0e3a66, #08182c);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      box-shadow: 0 0 25px rgba(58, 167, 255, 0.4);
+      display: grid;
+      place-items: center;
+      color: var(--red);
+      font-size: 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 86px 0 60px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(58, 167, 255, 0.12);
+      border: 1px solid rgba(58, 167, 255, 0.35);
+      color: #d8efff;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 1.05;
+      margin-bottom: 22px;
+      letter-spacing: -2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff, #8fd3ff, #ff7a95);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 19px;
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), #705cff);
+      color: white;
+      border: none;
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 26px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .big-logo {
+      height: 230px;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 40% 30%, rgba(255,255,255,0.16), transparent 20%),
+        linear-gradient(160deg, #103c68, #061224);
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .big-logo::before,
+    .big-logo::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .big-logo::before {
+      width: 4px;
+      height: 4px;
+      top: 35px;
+      left: 50px;
+      box-shadow:
+        80px 20px white,
+        140px 70px white,
+        35px 120px white,
+        190px 145px white,
+        230px 45px white;
+    }
+
+    .big-logo::after {
+      width: 150px;
+      height: 150px;
+      border: 2px solid rgba(255, 49, 90, 0.7);
+      transform: rotate(-25deg);
+      background: transparent;
+      box-shadow: 0 0 30px rgba(255,49,90,0.25);
+    }
+
+    .rocket {
+      position: relative;
+      z-index: 2;
+      font-size: 72px;
+      filter: drop-shadow(0 0 20px rgba(255,49,90,0.8));
+    }
+
+    .info-list {
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .info-list strong {
+      color: white;
+    }
+
+    section {
+      padding: 54px 0;
+    }
+
+    .section-title {
+      margin-bottom: 26px;
+    }
+
+    .section-title span {
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(30px, 4vw, 46px);
+      margin-top: 6px;
+      letter-spacing: -1px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.18);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 21px;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      color: #dcecff;
+      font-size: 12px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .program {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .program h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: white;
+    }
+
+    .date {
+      color: var(--yellow);
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .program p {
+      color: var(--muted);
+    }
+
+    .highlight {
+      border-left: 4px solid var(--red);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    ul {
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    th, td {
+      padding: 16px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: rgba(58, 167, 255, 0.16);
+      color: white;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    td {
+      color: var(--muted);
+    }
+
+    td:first-child {
+      color: white;
+      font-weight: 800;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .timeline-date {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .contact-box {
+      background:
+        linear-gradient(135deg, rgba(58, 167, 255, 0.18), rgba(255, 49, 90, 0.12)),
+        var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      padding: 28px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .cards,
+      .program-grid,
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <div class="logo">🚀</div>
+        <span>Számalk Space Club</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#club">A klub</a>
+        <a href="#programok">Programok</a>
+        <a href="#iskola">Mit ad az iskolának</a>
+        <a href="#keresek">Kérések</a>
+        <a href="#kapcsolat">Kapcsolat</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge">2026/27-es tanév · ESA és MANT programok</div>
+          <h1>
+            <span class="gradient-text">Számalk Space Club</span><br />
+            programterv
+          </h1>
+          <p class="lead">
+            Űrkutatás, műholdas adatok, Linux, hálózatok, kommunikáció és versenyprojektek
+            egy középiskolai klubban — gyakorlati, ingyenesen nevezhető programokkal.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#programok">Programok megnézése</a>
+            <a class="btn btn-secondary" href="#keresek">Iskolai kérések</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <div class="big-logo">
+            <div class="rocket">🚀</div>
+          </div>
+
+          <div class="info-list">
+            <p><strong>Címzett:</strong> Halász István, igazgató</p>
+            <p><strong>Intézmény:</strong> SZÁMALK-Szalézi Technikum és Szakgimnázium</p>
+            <p><strong>Szakmai partner:</strong> DlabSPACE Kft. — Győző Gábor</p>
+            <p><strong>Első ülés:</strong> 2026.10.01.</p>
+            <p><strong>Létszámcél:</strong> 4–6 fő év végére</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="club">
+      <div class="container">
+        <div class="section-title">
+          <span>01</span>
+          <h2>Mit csinál a klub?</h2>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="pill">Földi szegmens</div>
+            <h3>Nem csak rakéta, hanem rendszer</h3>
+            <p>
+              A klub szakmai alapja a műholdas munkák földi oldala: hálózat, Linux,
+              protokollok, adatfolyamok, telemetria és üzemeltetés.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="pill">Küldetés-sáv</div>
+            <h3>Kódolás és adatfeldolgozás</h3>
+            <p>
+              A küldetés-sáv programoz, adatot gyűjt, műholdas vagy szenzoros adatokat
+              dolgoz fel, és működő projekteket készít.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="pill">Kommunikációs sáv</div>
+            <h3>Dokumentáció és média</h3>
+            <p>
+              A kommunikációs sáv grafikát, videót, prezentációt és projektbemutatót készít.
+              Ez versenypontokat is ér, nem csak díszítés.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="programok">
+      <div class="container">
+        <div class="section-title">
+          <span>02</span>
+          <h2>A tanév programjai</h2>
+        </div>
+
+        <div class="program-grid">
+          <article class="program">
+            <h3>Astro Pi Mission Zero</h3>
+            <span class="date">2026. szeptember 14. – 2027. március 22.</span>
+            <p>
+              Rövid Python-program, amely a Nemzetközi Űrállomáson fut legfeljebb
+              30 másodpercig. Böngészőből megoldható, hardver nélkül. Minden résztvevő
+              ESA-oklevelet kap.
+            </p>
+          </article>
+
+          <article class="program">
+            <h3>Astro Pi Mission Space Lab</h3>
+            <span class="date">2026. szeptember 14. – 2027. február 22.</span>
+            <p>
+              Haladó csapatverseny 2–6 fős csapatoknak. A csapat saját űrtudományi
+              projektet választ, az ISS szenzoraiból vagy kamerájából gyűjt adatot.
+            </p>
+          </article>
+
+          <article class="program highlight">
+            <h3>CanSat Hungary 2027</h3>
+            <span class="date">Nevezés: 2026. október 14. · Döntő: 2027. április 9–10.</span>
+            <p>
+              Üdítősdoboz méretű műhold építése. A projektben fontos a telemetria,
+              az adatfeldolgozás, a mérések és az angol nyelvű prezentáció is.
+            </p>
+          </article>
+
+          <article class="program">
+            <h3>Klímadetektívek</h3>
+            <span class="date">2026. szeptember 7. – 2027. április 2.</span>
+            <p>
+              Helyi környezeti probléma vizsgálata nyílt műholdas Föld-megfigyelési
+              adatokkal. Tervezett téma: budapesti hőszigethatás vagy levegőminőség.
+            </p>
+          </article>
+
+          <article class="program">
+            <h3>Holdtábor — Moon Camp Challenge</h3>
+            <span class="date">2026. szeptember 18. – 2027. július 27.</span>
+            <p>
+              Holdbázis tervezése szabad formátumban: 3D-modell, animáció, játék,
+              makett vagy tudományos kísérlet. Ideális kreatív diákoknak.
+            </p>
+          </article>
+
+          <article class="program">
+            <h3>NASA Space Apps Challenge</h3>
+            <span class="date">2026. november 14–15.</span>
+            <p>
+              A világ legnagyobb űrhackathonja nyílt NASA-adatokkal. Budapesti vagy
+              virtuális részvétellel oldható meg.
+            </p>
+          </article>
+
+          <article class="program">
+            <h3>ARISS</h3>
+            <span class="date">Pályázat az őszi ablakban</span>
+            <p>
+              Élő rádiókapcsolat az ISS-sel, telebridge formában. Az iskola nem vesz
+              rádiós eszközt, a kapcsolatot távoli engedélyes állomás biztosítja.
+            </p>
+          </article>
+
+          <article class="program">
+            <h3>MANT-pályázatok és „Irány az űr!”</h3>
+            <span class="date">Ősztől tavaszig</span>
+            <p>
+              Online fordulók, budapesti döntő, diák- és rajzpályázatok. Ezek gyorsabb
+              sikerélményt adhatnak a nagyobb projektek előtt.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="iskola">
+      <div class="container">
+        <div class="section-title">
+          <span>03</span>
+          <h2>Mit ad a klub az iskolának?</h2>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <h3>Kézzelfogható eredmények</h3>
+            <ul>
+              <li>ESA-oklevelek a diákok nevére</li>
+              <li>Beadott versenyprojektek</li>
+              <li>Dokumentált eredmények</li>
+              <li>Év végi bemutató szülőknek és fenntartónak</li>
+              <li>Felhasználható médiaanyag a beiskolázáshoz</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Forrásteremtési lehetőség</h3>
+            <p>
+              Ha a klub a tanév első felében eredményt mutat fel, alapot adhat a februári
+              Nemzeti Tehetség Program és Erasmus+ KA121 pályázatokhoz.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <span>04</span>
+          <h2>Amit a klub vállal</h2>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <h3>Díjmentes nevezések</h3>
+            <p>
+              A programok nevezése ingyenes, és a működés nem igényel iskolai költségvetést.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Szakmai mentorálás</h3>
+            <p>
+              A DlabSPACE Kft. vállalja a nagykorú mentor szerepét, szakmai előadásokat
+              és havi 1–2 óra mérnöki mentorálást.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Kapcsolatépítés</h3>
+            <p>
+              Kapcsolatfelvétel az ESERO Hungary, a MANT, a BME kisműholdas csoportja
+              és a Student Spacelab Network felé.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="keresek">
+      <div class="container">
+        <div class="section-title">
+          <span>05</span>
+          <h2>Kérések az iskola felé</h2>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Mit kérünk?</th>
+                <th>Kitől?</th>
+                <th>Mire kell?</th>
+                <th>Mikorra?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Patronáló tanár kijelölése.</td>
+                <td>Igazgató</td>
+                <td>Nevezések és iskolai jelenlét alapja</td>
+                <td>Azonnal</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>CanSat mentor tanár kijelölése.</td>
+                <td>Igazgató, szaktanár</td>
+                <td>CanSat-nevezés</td>
+                <td>Október 7.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Iskola nevének és logójának használati engedélye.</td>
+                <td>Igazgató</td>
+                <td>Nevezések, pólók, matricák, prezentációk, sajtó</td>
+                <td>Szeptember vége</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>ARISS-hez aláírt adatkezelési nyilatkozat és éves naptár Excelben.</td>
+                <td>Titkárság</td>
+                <td>ARISS-pályázat</td>
+                <td>Október 15.</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Hozzáférés elektronikai és 3D-nyomtató eszközökhöz felügyelet mellett.</td>
+                <td>Műszaki szaktanár</td>
+                <td>CanSat-építés</td>
+                <td>Október 7.</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Terem havi 1–2 alkalomra és zárható szekrény.</td>
+                <td>Igazgató</td>
+                <td>Klubműködés</td>
+                <td>Október eleje</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Iskolai e-mail cím, például spaceclub@szamalk-szalezi.hu.</td>
+                <td>Rendszergazda</td>
+                <td>Nevezések, levelezés</td>
+                <td>Szeptember vége</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Szülői hozzájáruló nyilatkozat mintája fotó- és videófelvételekhez.</td>
+                <td>Titkárság</td>
+                <td>Nyilvános megjelenések</td>
+                <td>Első esemény előtt</td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Megjelenés az iskola honlapján és közösségi oldalain.</td>
+                <td>Kommunikációs felelős</td>
+                <td>Versenypontszám és beiskolázás</td>
+                <td>Folyamatosan</td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Felelős kijelölése NTP-pályázatra és Erasmus+ egyeztetés.</td>
+                <td>Igazgató</td>
+                <td>Második év forrásai</td>
+                <td>2027. január</td>
+              </tr>
+              <tr>
+                <td>11</td>
+                <td>Időpont az év végi bemutatóra az iskolai naptárban.</td>
+                <td>Igazgatóhelyettes</td>
+                <td>Zárás, szülői és fenntartói bemutató</td>
+                <td>Tanév rendjének tervezésekor</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <span>06</span>
+          <h2>A következő négy hét</h2>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">Szept. 23. és okt. 1.</div>
+            <div>CanSat online tájékoztatók, mentor- és eszközkérdések tisztázása.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Szeptember vége</div>
+            <div>Alakuló ülés, szerepek kiosztása, Astro Pi Mission Zero végigvitele.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Október 7.</div>
+            <div>Döntés a CanSat-nevezésről a mentor és eszközök alapján.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Október 14. 23:59</div>
+            <div>CanSat-nevezés határideje.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Október közepe</div>
+            <div>ARISS-pályázat beadása.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">November 14–15.</div>
+            <div>NASA Space Apps Challenge.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kapcsolat">
+      <div class="container">
+        <div class="contact-box">
+          <div class="section-title">
+            <span>07</span>
+            <h2>Kapcsolattartás</h2>
+          </div>
+
+          <p>
+            Egy iskolai kapcsolattartó kijelölését kérjük, akihez a klubbal kapcsolatos
+            kérések és adminisztráció befutnak. Ez lehet a patronáló tanár is.
+          </p>
+          <br />
+          <p>
+            <strong>Diákkapcsolattartó:</strong> Győző Dávid<br />
+            <strong>Szakmai partner:</strong> DlabSPACE Kft., ügyvezető: Győző Gábor
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Számalk Space Club — Programterv · 2026/27
+    </div>
+  </footer>
+</body>
+</html>
